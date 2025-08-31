@@ -1,12 +1,83 @@
-🌿 Leafify: AI-Powered Plant Disease DetectionLeafify is an intelligent web application designed to help gardeners, farmers, and plant enthusiasts identify diseases in plants simply by uploading a picture of a leaf.🎯 About The ProjectEarly detection of plant diseases is crucial for preventing crop loss and ensuring healthy growth. However, identifying these diseases often requires expert knowledge. Leafify aims to bridge this gap by leveraging the power of Artificial Intelligence and Computer Vision.This project uses a two-step deep learning model:Object Detection/Cropping Model: First, it automatically identifies and isolates the leaf from the background of an uploaded image.Classification Model: The cropped leaf image is then fed into a highly-trained classification model to diagnose the specific disease, if any.Built With:PythonTensorFlow / KerasOpenCVFlask (for the web interface)🚀 Getting StartedFollow these instructions to get a local copy of Leafify up and running on your machine for development and testing purposes.PrerequisitesPython 3.8+Git for version controlInstallationClone the GitHub Repositorygit clone [https://github.com/](https://github.com/)<YOUR_USERNAME>/Leafify.git
-cd Leafify
-Create and Activate a Virtual Environment# For macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
+# 🌿 Leafify
 
-# For Windows
-python -m venv venv
-venv\Scripts\activate
-Install Required Packagespip install -r requirements.txt
-Download the DatasetThis project uses the PlantVillage dataset. You will need to download it for training the model. (Note: The dataset is excluded from this repository via .gitignore).git clone [https://github.com/spMohanty/PlantVillage-Dataset.git](https://github.com/spMohanty/PlantVillage-Dataset.git)
-UsageOnce the application is running:Navigate to the local URL provided by Flask (e.g., http://127.0.0.1:5000).Click the "Upload Image" button.Select an image file of a plant leaf from your computer.The application will process the image and display the predicted disease name along with the confidence score.(Further usage instructions will be added as the web interface is developed.)roadmap Future Enhancements[ ] Develop a more robust leaf-cropping model.[ ] Train the classifier on a wider variety of plants and diseases.[ ] Build a user-friendly web interface with Flask.[ ] Deploy the application to a cloud service (e.g., Heroku, AWS).[ ] Add support for real-time detection using a mobile camera.🙏 AcknowledgementsThis project would not be possible without the excellent work of the creators of the PlantVillage dataset.Mohanty, S. P., Hughes, D. P., & Salathé, M. (2016). Using Deep Learning for Image-Based Plant Disease Detection. Frontiers in Plant Science, 7, 1419.
+**Leafify: Your plant health, simplified.**
+
+A web-based application that uses deep learning to detect and identify diseases in plant leaves from uploaded images.
+
+
+
+---
+
+## ## About The Project
+
+This project is designed to help farmers and gardeners identify plant diseases early, allowing for timely intervention and potentially saving crops. The application leverages computer vision and a trained convolutional neural network (CNN) to first detect and crop the leaf from an image and then classify its health status, identifying specific diseases if present.
+
+The core of Leafify is built with Python, using **TensorFlow** for the deep learning model and **OpenCV** for image processing tasks. The model is served through a simple and intuitive web interface created with the **Flask** web framework.
+
+---
+
+## ## Key Features
+
+* **Image Upload**: Simple interface to upload an image of a plant leaf.
+* **Automatic Leaf Detection**: The model automatically identifies and isolates the leaf from the background.
+* **Disease Classification**: The AI model classifies the leaf's condition (e.g., healthy, rust, powdery mildew).
+* **Instant Results**: Get a clear diagnosis within seconds.
+
+---
+
+## ## Technology Stack
+
+* **Backend**: Python, Flask
+* **Machine Learning**: TensorFlow, Keras
+* **Image Processing**: OpenCV, NumPy
+* **Frontend**: HTML, CSS (basic)
+
+---
+
+## ## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### ### Prerequisites
+
+Make sure you have Python 3.8+ and Git installed on your system.
+
+### ### Installation
+
+1.  **Clone the repository:**
+    ```sh
+    git clone [https://github.com/](https://github.com/)<YOUR_USERNAME>/Leafify.git
+    cd Leafify
+    ```
+2.  **Create and activate a virtual environment:**
+    ```sh
+    # For macOS/Linux
+    python3 -m venv venv
+    source venv/bin/activate
+
+    # For Windows
+    python -m venv venv
+    venv\Scripts\activate
+    ```
+3.  **Install the required packages:**
+    ```sh
+    pip install -r requirements.txt
+    ```
+    *(Note: You will need to create a `requirements.txt` file by running `pip freeze > requirements.txt`)*
+
+---
+
+## ## Usage
+
+1.  **Run the Flask application:**
+    ```sh
+    python app.py
+    ```
+2.  **Open your web browser** and navigate to `http://127.0.0.1:5000`.
+3.  **Upload an image** of a plant leaf and see the diagnosis.
+
+---
+
+## ## Project Status
+
+This project is currently in active development. The next steps include improving model accuracy and refining the user interface.
