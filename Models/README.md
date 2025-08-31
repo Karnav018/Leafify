@@ -2,9 +2,9 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg) ![FastAPI](https://img.shields.io/badge/FastAPI-0.103%2B-green.svg) ![Vite](https://img.shields.io/badge/Vite-5.0%2B-purple.svg) ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.10%2B-orange.svg)
 
-**A modern web application that uses deep learning to identify plant diseases from leaf images.**
+**A modern web application that uses an ensemble of deep learning models to deliver highly accurate plant disease diagnoses.**
 
-Leafify provides an intuitive interface for users to upload an image of a plant leaf and receive an instant, accurate diagnosis powered by a state-of-the-art computer vision model.
+Leafify provides an intuitive interface for users to upload an image of a plant leaf and receive an instant diagnosis based on the consensus of multiple "expert" AI models.
 
 
 
@@ -12,10 +12,27 @@ Leafify provides an intuitive interface for users to upload an image of a plant 
 
 ## ## ✨ Key Features
 
-* **High-Accuracy Predictions**: Leverages a fine-tuned `EfficientNetB4` model for state-of-the-art classification accuracy.
+* **State-of-the-Art Accuracy**: Employs an **Ensemble Learning** approach, combining predictions from multiple models to achieve superior accuracy and reliability.
 * **Modern Tech Stack**: Built with a fast and responsive Vite (React) frontend and a high-performance FastAPI backend.
-* **Instant Analysis**: Delivers predictions in seconds, providing a confidence score for each diagnosis.
+* **Robust Analysis**: Delivers a final prediction based on the averaged confidence scores from all models in the ensemble.
 * **Simple & Responsive UI**: A clean, user-friendly interface that works seamlessly on both desktop and mobile devices.
+
+---
+
+## ## 🤖 Machine Learning Model: Ensemble Approach
+
+To maximize predictive performance, Leafify uses an ensemble of deep learning models. This "wisdom of the crowd" approach ensures that the final diagnosis is more robust and accurate than what any single model could provide.
+
+* **Base Models**: The ensemble is composed of several powerful, pre-trained architectures:
+    * **EfficientNetB4**
+    * **ResNet50**
+    * **(Optional) DenseNet121**
+
+* **Ensemble Method**: We use **Averaging Probabilities (Soft Voting)**. Each model in the ensemble makes a prediction and outputs a list of confidence scores for all possible classes. These scores are then averaged, and the class with the highest average score is chosen as the final prediction.
+
+* **Dataset**: [Plant Disease Classification - Merged Dataset](https://www.kaggle.com/datasets/alinedobrovsky/plant-disease-classification-merged-dataset)
+
+* **Performance**: The ensemble model achieved **[Your Final Accuracy]%** accuracy on the unseen test set.
 
 ---
 
@@ -26,23 +43,7 @@ Leafify uses a decoupled frontend/backend architecture for modern development an
 * **Frontend**: Vite, React, CSS3
 * **Backend**: Python, FastAPI
 * **Machine Learning**: TensorFlow (Keras), OpenCV, NumPy
-* **Dataset**: [Plant Disease Classification - Merged Dataset](https://www.kaggle.com/datasets/alinedobrovsky/plant-disease-classification-merged-dataset)
-
-### ### Architecture
-
-The frontend (built with Vite) communicates with the backend (built with FastAPI) via a REST API. The backend handles image processing and runs the inference using the trained TensorFlow model.
-
----
-
-## ## 🤖 Machine Learning Model
-
-The core of Leafify is a deep learning model trained for multi-class image classification.
-
-* **Model**: `EfficientNetB4`
-* **Technique**: Transfer Learning and Fine-Tuning
-* **Performance**: Achieved **[Your Accuracy]%** accuracy on the unseen test set.
-
-For more details on the data preparation and training process, please see the `model/README.md` file.
+* **Ensemble Models**: EfficientNet, ResNet, DenseNet
 
 ---
 
@@ -56,3 +57,17 @@ Make sure you have the following installed:
 * Python 3.9+
 * Node.js and npm
 * Git
+
+### ### 1. Backend Setup
+
+```bash
+# Clone the repository
+git clone [https://github.com/](https://github.com/)<YOUR_USERNAME>/Leafify.git
+cd Leafify
+
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install Python dependencies
+pip install -r requirements.txt

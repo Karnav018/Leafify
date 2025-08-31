@@ -1,2 +1,2 @@
-# Ignore the data folder in Models
-/data/
+# Ignore data folder containing training images
+data/
