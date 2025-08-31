@@ -1,1 +1,12 @@
-# Leafify
+🌿 Leafify: AI-Powered Plant Disease DetectionLeafify is an intelligent web application designed to help gardeners, farmers, and plant enthusiasts identify diseases in plants simply by uploading a picture of a leaf.🎯 About The ProjectEarly detection of plant diseases is crucial for preventing crop loss and ensuring healthy growth. However, identifying these diseases often requires expert knowledge. Leafify aims to bridge this gap by leveraging the power of Artificial Intelligence and Computer Vision.This project uses a two-step deep learning model:Object Detection/Cropping Model: First, it automatically identifies and isolates the leaf from the background of an uploaded image.Classification Model: The cropped leaf image is then fed into a highly-trained classification model to diagnose the specific disease, if any.Built With:PythonTensorFlow / KerasOpenCVFlask (for the web interface)🚀 Getting StartedFollow these instructions to get a local copy of Leafify up and running on your machine for development and testing purposes.PrerequisitesPython 3.8+Git for version controlInstallationClone the GitHub Repositorygit clone [https://github.com/](https://github.com/)<YOUR_USERNAME>/Leafify.git
+cd Leafify
+Create and Activate a Virtual Environment# For macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+
+# For Windows
+python -m venv venv
+venv\Scripts\activate
+Install Required Packagespip install -r requirements.txt
+Download the DatasetThis project uses the PlantVillage dataset. You will need to download it for training the model. (Note: The dataset is excluded from this repository via .gitignore).git clone [https://github.com/spMohanty/PlantVillage-Dataset.git](https://github.com/spMohanty/PlantVillage-Dataset.git)
+UsageOnce the application is running:Navigate to the local URL provided by Flask (e.g., http://127.0.0.1:5000).Click the "Upload Image" button.Select an image file of a plant leaf from your computer.The application will process the image and display the predicted disease name along with the confidence score.(Further usage instructions will be added as the web interface is developed.)roadmap Future Enhancements[ ] Develop a more robust leaf-cropping model.[ ] Train the classifier on a wider variety of plants and diseases.[ ] Build a user-friendly web interface with Flask.[ ] Deploy the application to a cloud service (e.g., Heroku, AWS).[ ] Add support for real-time detection using a mobile camera.🙏 AcknowledgementsThis project would not be possible without the excellent work of the creators of the PlantVillage dataset.Mohanty, S. P., Hughes, D. P., & Salathé, M. (2016). Using Deep Learning for Image-Based Plant Disease Detection. Frontiers in Plant Science, 7, 1419.
