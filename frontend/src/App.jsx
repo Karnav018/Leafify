@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import UploadPage from './components/UploadPage';
-import LoadingPage from './components/LoadingPage';
-import ResultsPage from './components/ResultsPage';
+import Upload from './components/Upload';
+import Loading from './components/Loading';
+import Results from './components/Results';
 import ErrorPage from './components/ErrorPage';
 
 // App states
@@ -22,32 +22,59 @@ function App() {
   const handleFileUpload = async (file) => {
     try {
       setError(null);
-      setUploadedImage(file);
+      const imageUrl = URL.createObjectURL(file);
+      setUploadedImage(imageUrl);
       setCurrentState(APP_STATES.LOADING);
 
       // TODO: Call API endpoint /api/predict
       // For now, simulate API call
-      await simulateAnalysis();
+      await simulateAnalysis(imageUrl);
       
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'Failed to analyze image. Please try again.');
       setCurrentState(APP_STATES.ERROR);
     }
   };
 
   // Simulate API analysis (replace with real API call later)
-  const simulateAnalysis = async () => {
-    return new Promise((resolve) => {
+  const simulateAnalysis = async (imageUrl) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        // Mock successful result
+        // Simulate occasional random errors for testing (5% chance)
+        if (Math.random() < 0.05) {
+          reject(new Error('Network connection failed. Please check your internet and try again.'));
+          return;
+        }
+
+        // Mock successful result with comprehensive data
         const mockResult = {
-          disease: "Tomato___Bacterial_spot",
-          confidence: 92
+          imageUrl: imageUrl,
+          cropName: "Tomato",
+          diseaseName: "Early Blight",
+          confidence: 92,
+          description: "Early blight is a common fungal disease that affects tomato plants. It typically appears as dark, concentric rings on older leaves and can spread rapidly in warm, humid conditions. The disease can significantly reduce fruit quality and yield if left untreated. It's caused by the fungus Alternaria solani and thrives in temperatures between 75-85°F with high humidity.",
+          solution: `**Immediate Treatment:**
+• Remove and destroy all affected leaves immediately
+• Apply fungicidal spray containing chlorothalonil or copper-based compounds
+• Increase air circulation around plants
+
+**Prevention Measures:**
+• Water at soil level to avoid wetting foliage  
+• Apply preventive fungicide treatments every 7-14 days during humid weather
+• Use disease-resistant tomato varieties when possible
+• Practice proper plant spacing (3-4 feet apart)
+• Mulch around plants to prevent soil splash
+
+**Long-term Management:**
+• Practice crop rotation (avoid planting tomatoes in same spot for 3-4 years)
+• Remove plant debris at end of season
+• Consider using drip irrigation instead of overhead watering
+• Apply balanced fertilizer to maintain plant health`
         };
         setAnalysisResults(mockResult);
         setCurrentState(APP_STATES.RESULTS);
         resolve(mockResult);
-      }, 3000); // 3 second delay to simulate processing
+      }, 2500); // 2.5 second delay - more realistic
     });
   };
 
@@ -69,41 +96,32 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-green-800 mb-2">🌿 Leafify</h1>
-          <p className="text-green-600 text-lg">AI-Powered Plant Disease Detection</p>
-        </header>
-
-        {/* Main Content */}
-        <main>
-          {currentState === APP_STATES.UPLOAD && (
-            <UploadPage onFileUpload={handleFileUpload} />
-          )}
-          
-          {currentState === APP_STATES.LOADING && (
-            <LoadingPage uploadedImage={uploadedImage} />
-          )}
-          
-          {currentState === APP_STATES.RESULTS && (
-            <ResultsPage 
-              uploadedImage={uploadedImage}
-              results={analysisResults}
-              onReset={handleReset}
-            />
-          )}
-          
-          {currentState === APP_STATES.ERROR && (
-            <ErrorPage 
-              error={error}
-              onRetry={handleRetry}
-              onReset={handleReset}
-            />
-          )}
-        </main>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+      {/* Main Content */}
+      <main>
+        {currentState === APP_STATES.UPLOAD && (
+          <Upload onImageUpload={handleFileUpload} />
+        )}
+        
+        {currentState === APP_STATES.LOADING && (
+          <Loading imageUrl={uploadedImage} />
+        )}
+        
+        {currentState === APP_STATES.RESULTS && (
+          <Results 
+            result={analysisResults}
+            onAnalyzeAnother={handleReset}
+          />
+        )}
+        
+        {currentState === APP_STATES.ERROR && (
+          <ErrorPage 
+            error={error}
+            onRetry={handleRetry}
+            onReset={handleReset}
+          />
+        )}
+      </main>
     </div>
   );
 }
